@@ -4,8 +4,8 @@ buildscript {
         springVersion = '5.2.8.RELEASE'
         httpMimeVersion = '4.5.12'
         aspectjVersion = '1.9.5'
-        mavenUserName = '5f03d6a0cc3021d7e3b10d1e'
-        mavenPassword = 'rhwCs0kO7Rdz'
+        mavenUserName = '5f570529fa82bfeb805b00fd'
+        mavenPassword = 'w8D1wcrzJ8Ie'
         lombokVersion = '+'
         jwtVersion = '3.10.3'
         commonLang3Version = '3.10'
@@ -34,24 +34,24 @@ configurations {
 
 repositories {
     mavenCentral()
-//    maven {
-//        credentials {
-//            username "$mavenUserName"
-//            password "$mavenPassword"
-//        }
-//        url ''
-//    }
-//    maven {
-//        credentials {
-//            username "$mavenUserName"
-//            password "$mavenPassword"
-//        }
-//        url ''
-//    }
+    maven {
+        credentials {
+            username "$mavenUserName"
+            password "$mavenPassword"
+        }
+        url 'https://packages.aliyun.com/maven/repository/2031196-release-NRdrSf/'
+    }
+
+    maven {
+        credentials {
+            username "$mavenUserName"
+            password "$mavenPassword"
+        }
+        url 'https://packages.aliyun.com/maven/repository/2031196-snapshot-6NE11W/'
+    }
     maven { url 'https://repo.spring.io/snapshot' }
     maven { url 'https://repo.spring.io/milestone' }
 }
-
 
 dependencies {
     compileOnly group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
@@ -102,7 +102,7 @@ uploadArchives {
                 description '公共类库'
             }
             // 注释3
-            repository(url: "") {
+            repository(url: "https://packages.aliyun.com/maven/repository/2031196-release-NRdrSf/") {
                 authentication(userName: "$mavenUserName", password: "$mavenPassword")
             }
         }
