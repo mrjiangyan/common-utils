@@ -2,9 +2,13 @@ package com.touchbiz.common.utils.date;
 
 
 import java.text.ParseException;
-import java.time.*;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
+
 import static com.touchbiz.common.utils.date.DateTimeFormat.*;
 
 /**
@@ -88,7 +92,7 @@ public class LocalDateTimeUtils {
      * @return 时间间隔天数
      */
     public static long getIntervalOfDay(LocalDateTime start, LocalDateTime end) {
-        Duration duration = java.time.Duration.between(start, end);
+        Duration duration = Duration.between(start, end);
         return duration.toDays();
     }
 
