@@ -22,7 +22,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 
 group = 'com.touchbiz'
-version = '1.0.0.RELEASE'
+version = '1.1.RELEASE'
 def artifactId = 'common-utils'
 sourceCompatibility = '1.8'
 

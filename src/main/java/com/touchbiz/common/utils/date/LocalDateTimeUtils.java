@@ -2,14 +2,9 @@ package com.touchbiz.common.utils.date;
 
 
 import java.text.ParseException;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
-
-import static com.touchbiz.common.utils.date.DateTimeFormat.*;
 
 /**
  * Date Time Utils Class.
@@ -26,7 +21,7 @@ public class LocalDateTimeUtils {
      * @throws ParseException 转换失败抛出异常
      */
     public static LocalDateTime stringToTimestamp(String dateStr) throws ParseException {
-        return stringToTimestamp(dateStr, DEFAULT_DATE_FORMAT);
+        return stringToTimestamp(dateStr, DateTimeFormat.DEFAULT_DATE_FORMAT);
     }
 
     /**
@@ -47,7 +42,7 @@ public class LocalDateTimeUtils {
      * @return 当前日期字符串
      */
     public static String getTodayStr() {
-        return getCurrentTimeStr(DEFAULT_DATE_FORMAT);
+        return getCurrentTimeStr(DateTimeFormat.DEFAULT_DATE_FORMAT);
     }
 
     /**
@@ -79,7 +74,7 @@ public class LocalDateTimeUtils {
      * @return 转换后的时间字符串
      */
     public static String dateToStr(LocalDateTime date) {
-        return dateToStr(date, DEFAULT_DATE_FORMAT);
+        return dateToStr(date, DateTimeFormat.DEFAULT_DATE_FORMAT);
     }
 
 
@@ -92,7 +87,7 @@ public class LocalDateTimeUtils {
      * @return 时间间隔天数
      */
     public static long getIntervalOfDay(LocalDateTime start, LocalDateTime end) {
-        Duration duration = Duration.between(start, end);
+        Duration duration = java.time.Duration.between(start, end);
         return duration.toDays();
     }
 
@@ -116,7 +111,7 @@ public class LocalDateTimeUtils {
      * @return 验证结果
      */
     public static boolean isDateTime(String dateStr) {
-        return isDateTime(dateStr, YYYYMMDD_REGEX);
+        return isDateTime(dateStr, DateTimeFormat.YYYYMMDD_REGEX);
     }
 
     /**
@@ -148,11 +143,11 @@ public class LocalDateTimeUtils {
     public static LocalDateTime parseExcelDate(String dateStr) throws ParseException {
         LocalDateTime date;
         try {
-            date =stringToTimestamp(dateStr, DEFAULT_FULL_DATE_FORMAT);
+            date =stringToTimestamp(dateStr, DateTimeFormat.DEFAULT_FULL_DATE_FORMAT);
         }
         catch (Exception e) {
             try {
-                date =stringToTimestamp(dateStr, DATE_FORMAT_WITH_BAR);
+                date =stringToTimestamp(dateStr, DateTimeFormat.DATE_FORMAT_WITH_BAR);
             } catch (Exception e1) {
                 date = LocalDateTime.of(1900, 1, 1,0,0);
                 date.plusDays(Integer.parseInt(dateStr));

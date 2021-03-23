@@ -1,11 +1,12 @@
 package com.touchbiz.common.utils.validation;
 
-import com.touchbiz.common.utils.date.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.touchbiz.common.utils.date.DateTimeFormat.YYYYMMDD_REGEX;
 
 /**
  * 身份证格式验证工具.
@@ -115,7 +116,7 @@ public class IDCardValidationUtils {
             return false;
         }
 
-        return CITY_CODE_MAP.containsKey(idCard.substring(0, 2)) && date.matches(DateTimeFormat.YYYYMMDD_REGEX);
+        return CITY_CODE_MAP.containsKey(idCard.substring(0, 2)) && date.matches(YYYYMMDD_REGEX);
 
     }
 
