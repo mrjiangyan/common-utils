@@ -1,12 +1,11 @@
 package com.touchbiz.common.utils.security;
 
-import org.apache.commons.codec.binary.Base64;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.TreeMap;
 
 /**
@@ -55,6 +54,6 @@ public class SignatureUtils {
         Mac mac = Mac.getInstance(HMAC_SHA1_ALGORITHM);
         mac.init(signingKey);
         byte[] rawHmac = mac.doFinal(data);
-        return new String(Base64.encodeBase64(rawHmac));
+        return Base64.getEncoder().encodeToString(rawHmac);
     }
 }
