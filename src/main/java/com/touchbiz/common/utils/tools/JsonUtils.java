@@ -16,15 +16,10 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.*;
 
 /**
@@ -146,34 +141,4 @@ public final class JsonUtils {
     }
 
 
-    public static <T> T fromJson(String jsonStr, Class<T> clazz) {
-        if (jsonStr == null) {
-            return null;
-        } else {
-            try {
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Date.class, new DateStringFormatTypeAdapter())
-                        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                        .create();
-                return gson.fromJson(jsonStr, clazz);
-            } catch (Exception e) {
-                log.error("JSON 字符串转对象失败", e);
-                return null;
-            }
-        }
-    }
-
-    public static String toJsonString(Object obj) {
-        if (obj == null) {
-            return null;
-        } else {
-            try {
-                Gson gson = new GsonBuilder().create();
-                return gson.toJson(obj);
-            } catch (Exception e) {
-                log.error("对象转JSON 字符串失败", e);
-                return null;
-            }
-        }
-    }
 }
