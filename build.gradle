@@ -22,7 +22,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 
 group = 'com.touchbiz'
-version = '1.2.RELEASE'
+version = '1.7.RELEASE'
 def artifactId = 'common-utils'
 sourceCompatibility = '1.8'
 
@@ -48,13 +48,14 @@ repositories {
 }
 
 dependencies {
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
     compileOnly group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     annotationProcessor group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     implementation group: "org.springframework.boot", name: "spring-boot-starter-json", version: "${springBootVersion}"
     implementation group: "org.springframework.boot", name: "spring-boot-starter", version: "${springBootVersion}"
     implementation group: "jakarta.validation", name: "jakarta.validation-api", version: "2.0.2"
 //    compile group: "com.squareup.okhttp3", name: "okhttp", version: "${okhttp}"
-    testImplementation group: "org.springframework.boot", name:  "spring-boot-starter-test", version: "${springBootVersion}"
+//    testImplementation group: "org.springframework.boot", name:  "spring-boot-starter-test", version: "${springBootVersion}"
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
 
 }

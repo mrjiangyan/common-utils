@@ -15,8 +15,8 @@ public class JsonUtilsTest {
         a.setAaa("2222");
         a.setTime(date);
         String json = JsonUtils.toJson(a);
-        A b = JsonUtils.fromJson(json,A.class);
-
+        A b = JsonUtils.toObject(json,A.class);
+        System.out.println(b);
     }
 
     public static class A{
