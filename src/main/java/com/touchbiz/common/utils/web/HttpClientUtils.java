@@ -200,7 +200,6 @@ public final class HttpClientUtils {
         return post(requestUrl, headers, params, DEFAULT_CONN_TIMEOUT, DEFAULT_SO_TIMEOUT, false);
     }
 
-
     public static HttpResponse post(String requestUrl, Map<String, Object> headers) {
         return post(requestUrl, headers, null);
     }

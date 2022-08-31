@@ -1,15 +1,16 @@
 buildscript {
     ext {
-        springBootVersion = '2.3.3.RELEASE'
-        springVersion = '5.2.8.RELEASE'
+        springBootVersion = '2.7.0'
+        springVersion = '5.3.20'
         httpMimeVersion = '4.5.12'
         aspectjVersion = '1.9.5'
-        mavenUserName = '5f573af3e1cf498f370573c8'
-        mavenPassword = 'WDwiza3S(oFV'
+        mavenUserName = '61402da4c364e0737d2e4d14'
+        mavenPassword = 'Gl9SYH4Xz]OB'
         lombokVersion = '+'
         jwtVersion = '3.10.3'
         commonLang3Version = '3.10'
         junitVersion = '4.13'
+        repositoryUrl = 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
 
     }
     repositories {
@@ -22,7 +23,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 
 group = 'com.touchbiz'
-version = '1.7.RELEASE'
+version = '2022.8.31'
 def artifactId = 'common-utils'
 sourceCompatibility = '1.8'
 
@@ -34,17 +35,19 @@ configurations {
 
 repositories {
     mavenCentral()
+
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+
     maven {
         credentials {
             username "$mavenUserName"
             password "$mavenPassword"
         }
-        url 'https://packages.aliyun.com/maven/repository/2031284-release-KDf3XN/'
+        url 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
     }
 
 
-    maven { url 'https://repo.spring.io/snapshot' }
-    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
@@ -93,8 +96,7 @@ uploadArchives {
                 packaging 'jar'
                 description '公共类库'
             }
-            // 注释3
-            repository(url: "https://packages.aliyun.com/maven/repository/2031284-release-KDf3XN/") {
+            repository(url: "$repositoryUrl") {
                 authentication(userName: "$mavenUserName", password: "$mavenPassword")
             }
         }
