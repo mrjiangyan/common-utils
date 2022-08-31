@@ -9,6 +9,7 @@ buildscript {
         lombokVersion = '+'
         jwtVersion = '3.10.3'
         commonLang3Version = '3.10'
+        commonEntityVersion = '2022.8.31.1'
         junitVersion = '4.13'
         repositoryUrl = 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
 
@@ -23,7 +24,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 
 group = 'com.touchbiz'
-version = '2022.8.31'
+version = '2022.8.31.2'
 def artifactId = 'common-utils'
 sourceCompatibility = '1.8'
 
@@ -51,6 +52,7 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.touchbiz', name: 'common-entity', version: "${ commonEntityVersion }"
     compile 'org.apache.httpcomponents:httpclient:4.5.13'
     compileOnly group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     annotationProcessor group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
