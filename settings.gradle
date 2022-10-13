@@ -12,4 +12,4 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'common-lib'
+rootProject.name = 'common-utils'

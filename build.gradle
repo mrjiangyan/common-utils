@@ -2,31 +2,36 @@ buildscript {
     ext {
         springBootVersion = '2.7.0'
         springVersion = '5.3.20'
-        httpMimeVersion = '4.5.12'
-        aspectjVersion = '1.9.5'
         mavenUserName = '61402da4c364e0737d2e4d14'
         mavenPassword = 'Gl9SYH4Xz]OB'
         lombokVersion = '+'
-        jwtVersion = '3.10.3'
-        commonLang3Version = '3.10'
-        commonEntityVersion = '2022.8.31.1'
+        commonEntityVersion = '2022.10.13.1'
         junitVersion = '4.13'
         repositoryUrl = 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
-
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            credentials {
+                username "$mavenUserName"
+                password "$mavenPassword"
+            }
+            url 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
+        }
     }
 }
 
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'java'
+apply plugin: 'java-library'
 
 group = 'com.touchbiz'
-version = '2022.8.31.2'
+version = '2022.10.13.2'
 def artifactId = 'common-utils'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -39,7 +44,9 @@ repositories {
 
     maven { url 'https://repo.spring.io/snapshot' }
     maven { url 'https://repo.spring.io/milestone' }
-
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
     maven {
         credentials {
             username "$mavenUserName"
@@ -48,19 +55,17 @@ repositories {
         url 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
     }
 
-
 }
 
 dependencies {
-    implementation group: 'com.touchbiz', name: 'common-entity', version: "${ commonEntityVersion }"
-    compile 'org.apache.httpcomponents:httpclient:4.5.13'
+    api "com.auth0:java-jwt:3.11.0"
+    api group: 'com.touchbiz', name: 'common-entity', version: "${ commonEntityVersion }"
+    api 'org.apache.httpcomponents:httpclient:4.5.13'
     compileOnly group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     annotationProcessor group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
-    implementation group: "org.springframework.boot", name: "spring-boot-starter-json", version: "${springBootVersion}"
-    implementation group: "org.springframework.boot", name: "spring-boot-starter", version: "${springBootVersion}"
-    implementation group: "jakarta.validation", name: "jakarta.validation-api", version: "2.0.2"
-//    compile group: "com.squareup.okhttp3", name: "okhttp", version: "${okhttp}"
-//    testImplementation group: "org.springframework.boot", name:  "spring-boot-starter-test", version: "${springBootVersion}"
+    api group: "org.springframework.boot", name: "spring-boot-starter-json", version: "${springBootVersion}"
+    api group: "org.springframework.boot", name: "spring-boot-starter", version: "${springBootVersion}"
+    api group: "jakarta.validation", name: "jakarta.validation-api", version: "2.0.2"
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
 
 }
@@ -75,32 +80,26 @@ artifacts {
     archives sourcesJar
 }
 
-//如果希望gradle install，安装到.m2本地仓库，参考下面的内容
-install {
-    repositories.mavenInstaller {
-        pom.version = "$project.version"
-        pom.artifactId = "$artifactId"
-        pom.groupId = "$project.group"
-    }
-}
 
-uploadArchives {
-    configuration = configurations['archives']
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = "$project.group"
+            artifactId = "$artifactId"
+            version = "$project.version"
+            from components.java
+        }
+    }
     repositories {
-        mavenDeployer {
-            // 注释1
-            pom.groupId = "$project.group"
-            pom.version = "$project.version"
-            pom.artifactId = "$artifactId"
-            // 注释2
-            pom.project {
-                name project.name
-                packaging 'jar'
-                description '公共类库'
+        maven {
+            //认证用户和密码
+            credentials{
+                username = "$mavenUserName"
+                password = "$mavenPassword"
             }
-            repository(url: "$repositoryUrl") {
-                authentication(userName: "$mavenUserName", password: "$mavenPassword")
-            }
+            //指定要上传的maven私服仓库
+            url "$repositoryUrl"
         }
     }
 }
