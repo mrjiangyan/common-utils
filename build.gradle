@@ -5,7 +5,7 @@ buildscript {
         mavenUserName = '61402da4c364e0737d2e4d14'
         mavenPassword = 'Gl9SYH4Xz]OB'
         lombokVersion = '+'
-        commonEntityVersion = '2022.10.13.1'
+        commonEntityVersion = '2023.2.16.1'
         junitVersion = '4.13'
         repositoryUrl = 'https://packages.aliyun.com/maven/repository/2137731-release-WXgfEj'
     }
@@ -29,9 +29,9 @@ apply plugin: 'java'
 apply plugin: 'java-library'
 
 group = 'com.touchbiz'
-version = '2022.10.13.2'
+version = '2023.2.16.1'
 def artifactId = 'common-utils'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {

@@ -159,18 +159,6 @@ public class LocalDateTimeUtils {
         return date;
     }
 
-    /**
-     * 将日期时间转换成时间戳的形式
-     *
-     * @param localDateTime 日期时间
-     * @return 1970年1月1日开始的时间戳
-     */
-    public static long getTimestampOfDateTime(LocalDateTime localDateTime) {
-        ZoneId zone = ZoneId.systemDefault();
-        Instant instant = localDateTime.atZone(zone).toInstant();
-        return instant.toEpochMilli();
-    }
-
 
     /**
      * 将日期时间转换成PHP时间戳的形式（Php为10位只精确到秒）
