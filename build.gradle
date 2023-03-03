@@ -5,6 +5,7 @@ buildscript {
         lombokVersion = '+'
         commonEntityVersion = '2023.2.28.2'
         junitVersion = '4.13'
+        minioVersion = '8.5.2'
     }
     repositories {
         mavenCentral()
@@ -20,7 +21,7 @@ apply plugin: 'java-library'
 apply plugin: 'signing'
 
 group = 'tech.touchbiz'
-version = '2023.2.28.1'
+version = '2023.3.3.1'
 def artifactId = 'common-utils'
 sourceCompatibility = '17'
 
@@ -38,6 +39,7 @@ dependencies {
     api "com.auth0:java-jwt:3.11.0"
     api group: 'tech.touchbiz', name: 'common-entity', version: "${ commonEntityVersion }"
     api 'org.apache.httpcomponents:httpclient:4.5.13'
+    api group: "io.minio", name: "minio", version: "${minioVersion}"
     compileOnly group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     annotationProcessor group: "org.projectlombok", name: "lombok", version: "${lombokVersion}"
     api group: "org.springframework.boot", name: "spring-boot-starter-json", version: "${springBootVersion}"
